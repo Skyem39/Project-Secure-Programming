@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MFA Verification - Gym Kebanggaan Pak Karim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin: 0 0 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #cf3232;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #cf3232;
+        }
+        .otp-box {
+            font-size: 24px;
+            font-weight: bold;
+            background: #f3f3f3;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+        ul li {
+            background: #ffdddd;
+            border: 1px solid #ff5c5c;
+            padding: 0.5rem;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            color: #a94442;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <h2>Gym Kebanggaan Pak Karim</h2>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <p>Enter the following authentication code:</p>
+        <div class="otp-box">{{ otp_code }}</div>
+        
+        <label for="mfa_code">MFA Code:</label>
+        <input type="text" name="mfa_code" id="mfa_code" required>
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

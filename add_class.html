@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Class - Gym Kebanggaan Pak Karim</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background: #f9f9f9;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          margin: 0;
+      }
+      .container {
+          background: #fff;
+          padding: 2rem;
+          border-radius: 8px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          text-align: center;
+      }
+      h1, h2 {
+          color: #333;
+          margin: 0 0 10px;
+      }
+      input[type="text"] {
+          width: 100%;
+          padding: 0.5rem;
+          margin: 10px 0;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+      }
+      button {
+          width: 100%;
+          padding: 0.75rem;
+          background-color: #cf3232;
+          border: none;
+          color: #fff;
+          font-size: 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-top: 10px;
+      }
+      button:hover {
+          background-color: #cf3232;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <h1>Add Class</h1>
+      <form method="POST">
+          <input type="text" name="class_name" placeholder="Class Name" required>
+          <input type="text" name="class_time" placeholder="Class Time" required>
+          <button type="submit">Add Class</button>
+      </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Classes - Gym Kebanggaan Pak Karim</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background: #f9f9f9;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          margin: 0;
+      }
+      .container {
+          background: #fff;
+          padding: 2rem;
+          border-radius: 8px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          width: 90%;
+          max-width: 800px;
+      }
+      h1, h2 {
+          text-align: center;
+          color: #333;
+          margin-bottom: 20px;
+      }
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+      }
+      th, td {
+          border: 1px solid #ccc;
+          padding: 0.75rem;
+          text-align: left;
+      }
+      th {
+          background-color: #f3f3f3;
+      }
+      a {
+          display: block;
+          margin-top: 15px;
+          text-decoration: none;
+          color: #cf3232;
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <h2>Gym Kebanggaan Pak Karim</h2>
+      <h1>View Classes</h1>
+      {% if classes %}
+      <table>
+          <tr>
+              <th>Class Name</th>
+              <th>Class Time</th>
+          </tr>
+          {% for class in classes %}
+          <tr>
+              <td>{{ class[1] }}</td>
+              <td>{{ class[2] }}</td>
+          </tr>
+          {% endfor %}
+      </table>
+      {% else %}
+          <p>No classes available.</p>
+      {% endif %}
+      <a href="{{ url_for('add_class') }}">Add New Class</a>
+      <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Gym Kebanggaan Pak Karim</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background: #f9f9f9;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          margin: 0;
+      }
+      .container {
+          background: #fff;
+          padding: 2rem;
+          border-radius: 8px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          text-align: center;
+      }
+      h1, h2 {
+          text-align: center;
+          color: #333;
+          margin: 0 0 10px;
+      }
+      a {
+          display: block;
+          margin: 10px 0;
+          text-decoration: none;
+          color: #fff;
+          background-color: #cf3232;
+          padding: 0.75rem;
+          border-radius: 4px;
+          transition: background-color 0.3s ease;
+      }
+      a:hover {
+          background-color: #cf3232;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <h2>Gym Kebanggaan Pak Karim</h2>
+      <h1>Dashboard</h1>
+      <p>Welcome, {{ username }}!</p>
+      <a href="{{ url_for('add_member') }}">Add Member</a>
+      <a href="{{ url_for('view_members') }}">View Members</a>
+      <a href="{{ url_for('register_member') }}">Register New Member</a>
+      <a href="{{ url_for('view_classes') }}">View Classes</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+  </div>
+</body>
+</html>

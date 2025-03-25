@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Class for Member - Gym Kebanggaan Pak Karim</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          background: #f9f9f9;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          margin: 0;
+      }
+      .container {
+          background: #fff;
+          padding: 2rem;
+          border-radius: 8px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          width: 300px;
+          text-align: center;
+      }
+      h1, h2 {
+          color: #333;
+          margin: 0 0 10px;
+      }
+      label {
+          font-weight: bold;
+          display: block;
+          margin-top: 10px;
+          text-align: left;
+      }
+      select {
+          width: 100%;
+          padding: 0.5rem;
+          margin: 5px 0 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+      }
+      input[type="submit"] {
+          width: 100%;
+          padding: 0.75rem;
+          background-color: #cf3232;
+          border: none;
+          color: #fff;
+          font-size: 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-top: 10px;
+      }
+      input[type="submit"]:hover {
+          background-color: #cf3232;
+      }
+      a {
+          display: block;
+          margin-top: 15px;
+          text-decoration: none;
+          color: #cf3232;
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <h1>Register Class for Member</h1>
+      <form action="{{ url_for('register_class', member_id=member_id) }}" method="POST">
+          <label for="class_id">Select Class:</label>
+          <select id="class_id" name="class_id" required>
+              {% for class in classes %}
+                  <option value="{{ class[0] }}">{{ class[1] }} ({{ class[2] }})</option>
+              {% endfor %}
+          </select>
+          <input type="submit" value="Register Class">
+      </form>
+      <a href="{{ url_for('view_members') }}">Back to Members List</a>
+  </div>
+</body>
+</html>
