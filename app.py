@@ -3,8 +3,6 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import time
 import pyotp
-import random
-import string
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey" 
