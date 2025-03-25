@@ -5,8 +5,6 @@ import time
 import pyotp
 import random
 import string
-# Removed: from captcha.image import ImageCaptcha
-# Removed: import base64
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey" 
