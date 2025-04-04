@@ -3,6 +3,9 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import time
 import pyotp
+import qrcode
+from io import BytesIO
+import base64
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey" 
@@ -145,8 +148,17 @@ def mfa():
         return redirect(url_for('login'))
 
     user_data = USERS.get(pending_user)
-    totp = pyotp.TOTP(user_data['mfa_secret'])
-    otp_code = totp.now()  # Generate the OTP code
+    secret = user_data['mfa_secret']
+    totp = pyotp.TOTP(secret)
+    
+    # Generate TOTP URI for QR Code
+    totp_uri = totp.provisioning_uri(name=pending_user, issuer_name="GymApp")
+    
+    # Generate QR Code
+    img = qrcode.make(totp_uri)
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    qr_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
     if request.method == 'POST':
         mfa_code = request.form.get('mfa_code')
@@ -160,7 +172,7 @@ def mfa():
             return redirect(url_for('dashboard'))
         else:
             flash("Invalid MFA code. Please try again.")
-    return render_template('mfa.html', otp_code=otp_code)
+    return render_template('mfa.html', qr_image=qr_image, secret=secret)
 
 # Dashboard (for both staff and members)
 @app.route('/dashboard')
