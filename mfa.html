@@ -19,7 +19,7 @@
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 400px;
             text-align: center;
         }
         h1, h2 {
@@ -53,14 +53,17 @@
         button:hover {
             background-color: #cf3232;
         }
-        .otp-box {
-            font-size: 24px;
-            font-weight: bold;
+        .qr-code {
+            margin: 15px auto;
+            max-width: 200px;
+        }
+        .secret-key {
+            font-size: 14px;
             background: #f3f3f3;
-            display: inline-block;
             padding: 10px;
             border-radius: 5px;
-            margin: 10px 0;
+            margin: 15px 0;
+            word-break: break-all;
         }
         ul {
             list-style: none;
@@ -75,6 +78,11 @@
             border-radius: 4px;
             color: #a94442;
             text-align: center;
+        }
+        .instructions {
+            font-size: 0.9em;
+            margin: 10px 0;
+            color: #666;
         }
     </style>
 </head>
@@ -91,11 +99,20 @@
                 </ul>
             {% endif %}
         {% endwith %}
+
+        <div class="instructions">
+            Scan this QR code with Google Authenticator:
+        </div>
         
-        <p>Enter the following authentication code:</p>
-        <div class="otp-box">{{ otp_code }}</div>
+        <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" class="qr-code">
         
-        <label for="mfa_code">MFA Code:</label>
+        <div class="instructions">
+            Or manually enter this secret key:<br>
+            <br><br>
+            <span class="secret-key">{{ secret }}</span>
+        </div>
+
+        <label for="mfa_code">Enter MFA Code:</label>
         <input type="text" name="mfa_code" id="mfa_code" required>
         <button type="submit">Verify</button>
     </form>
