@@ -12,7 +12,7 @@ app.secret_key = "supersecretkey"
 
 DATABASE = 'members.db'
 
-# USERS now include MFA settings. In production, you'd store these in your database.
+# USERS now include MFA settings. 
 USERS = {
     "staff": {
         "password": generate_password_hash("staffpass"),
