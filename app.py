@@ -1,35 +1,35 @@
 from flask import Flask, render_template, request, redirect, url_for, session, g, flash
-import sqlite3
-from werkzeug.security import generate_password_hash, check_password_hash
-import time
-import pyotp
-import qrcode
-from io import BytesIO
-import base64
+import sqlite3 #import database
+from werkzeug.security import generate_password_hash, check_password_hash #for user setup
+import time #calculate cooldown period
+import pyotp #TOTP code generation
+import qrcode #Qr code
+from io import BytesIO #Qr code generation
+import base64 #Embed QR code in HTML
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey" 
+app.secret_key = "supersecretkey"  #Session encryption
 
-DATABASE = 'members.db'
+DATABASE = 'members.db' #SQL parameterization
 
-# USERS now include MFA settings. 
+# 1: Passwords stored as hashes using Werkzeug
 USERS = {
     "staff": {
-        "password": generate_password_hash("staffpass"),
+        "password": generate_password_hash("staffpass"), #Hash Stored
         "role": "staff",
         "mfa_enabled": True,
-        "mfa_secret": pyotp.random_base32()
+        "mfa_secret": pyotp.random_base32() #Generate secret key
     },
     "member": {
-        "password": generate_password_hash("memberpass"),
+        "password": generate_password_hash("memberpass"), #Hash Stored
         "role": "member",
         "mfa_enabled": False
     },
     "pakkarim": {
-        "password": generate_password_hash("karim"),
+        "password": generate_password_hash("karim"), #Hash Stored
         "role": "staff",
         "mfa_enabled": True,
-        "mfa_secret": pyotp.random_base32()
+        "mfa_secret": pyotp.random_base32() #Generate secret key
     }
 }
 
@@ -84,7 +84,7 @@ def create_tables():
 # Home Route (Login) with account lockout and MFA integration
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    # Initialize failed attempt tracking in the session if not present
+    # Account lockout meechanism
     if 'failed_attempts' not in session:
         session['failed_attempts'] = 0
     if 'cooldown_until' not in session:
@@ -99,13 +99,10 @@ def login():
         wait_time = int(session['cooldown_until'] - current_time)
         flash(f"Too many failed attempts. Please wait {wait_time} seconds before trying again.")
 
-    # On GET, (CAPTCHA code removed)
     if request.method == 'GET':
-        pass  # Removed: CAPTCHA generation code
+        pass  
 
     if request.method == 'POST':
-        # Removed: CAPTCHA answer check
-
         # Prevent processing login if inputs are disabled
         if disabled:
             return render_template('login.html', disabled=disabled)
